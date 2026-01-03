@@ -1,56 +1,60 @@
 import axios from "axios";
 
-const gitAxios = axios.create({
-  baseURL: "https://api.github.com",
-  headers: {
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-    per_page: 100,
-    //todo: add your token here
-    Authorization: `Bearer `,
-  },
-});
+function genAxios(token) {
+  return axios.create({
+    baseURL: "https://api.github.com",
+    headers: {
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      per_page: 100,
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
 const DESC = "All API Hub to Gist";
 const FILENAME = "ALL_AI_HUB.json";
-async function uploadToGist(jsonData) {
-  const res = await gitAxios.get("/gists");
+async function uploadToGist(jsonData, token) {
+  const res = await genAxios(token).get("/gists");
+  if (res.data.length === 0) {
+    return createGist(jsonData, token);
+  }
   for (const item of res.data) {
     if (item.description === DESC) {
-      return updateGist(item.id, jsonData);
+      return updateGist(item.id, jsonData, token);
     }
-    return createGist(jsonData);
+    return createGist(jsonData, token);
   }
 }
-async function updateGist(gistId, jsonData) {
-  return gitAxios.patch(`/gists/${gistId}`, {
+async function updateGist(gistId, jsonData, token) {
+  return genAxios(token).patch(`/gists/${gistId}`, {
     description: DESC,
     public: false,
     files: {
       [FILENAME]: {
-        content: jsonData,
+        content: Buffer.from(jsonData, 'utf-8').toString('base64'),
       },
     },
   });
 }
 
-async function createGist(jsonData) {
-  return gitAxios.post("/gists", {
+async function createGist(jsonData, token) {
+  return genAxios(token).post("/gists", {
     description: DESC,
     public: false,
     files: {
       [FILENAME]: {
-        content: jsonData,
+        content: Buffer.from(jsonData, 'utf-8').toString('base64'),
       },
     },
   });
 }
 
-async function getGist() {
-  const res = await gitAxios.get("/gists");
+async function getGist(token) {
+  const res = await genAxios(token).get("/gists");
   for (const item of res.data) {
     if (item.description === DESC) {
-      const res = await gitAxios.get("/gists/" + item.id)
-      return res.data.files[FILENAME].content;
+      const res = await genAxios(token).get("/gists/" + item.id)
+      return Buffer.from(res.data.files[FILENAME].content, 'base64').toString('utf-8');
     }
   }
 }
