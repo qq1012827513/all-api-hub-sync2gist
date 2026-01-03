@@ -56,53 +56,6 @@ docker build -t all-api-hub-sync2gist .
 docker run -p 12001:12001 all-api-hub-sync2gist
 ```
 
-## API 使用说明
-
-### 1. 上传数据到 Gist
-
-**请求**
-```http
-PUT /{github_token}
-Content-Type: application/json
-
-{
-  "your": "data"
-}
-```
-
-**说明**
-- 将 `{github_token}` 替换为您的 GitHub Personal Access Token
-- 请求体为要存储的 JSON 数据
-- 数据将以 Base64 编码存储在 Gist 中
-
-**响应**
-- `200 OK`: 上传成功
-
-### 2. 获取 Gist 数据
-
-**请求**
-```http
-GET /{github_token}
-```
-
-**说明**
-- 将 `{github_token}` 替换为您的 GitHub Personal Access Token
-- 返回存储在 Gist 中的原始数据
-
-**响应**
-- `200 OK`: 返回 JSON 数据
-- `404/500`: 错误信息
-
-### 3. 创建目录（WebDAV 兼容）
-
-**请求**
-```http
-MKCOL /{github_token}
-```
-
-**响应**
-- `201 Created`: 目录创建成功
-
 ## Gist 配置
 
 - **描述**: `All API Hub to Gist`
@@ -120,14 +73,6 @@ all-api-hub-sync2gist/
 ├── Dockerfile       # Docker 镜像配置
 ├── package.json     # 项目依赖配置
 └── README.MD        # 项目文档
-```
-
-## 环境变量
-
-当前版本通过 URL 路径传递 GitHub Token。如需更安全的方式，建议使用环境变量：
-
-```bash
-GITHUB_TOKEN=your_token_here npm start
 ```
 
 ## 注意事项
