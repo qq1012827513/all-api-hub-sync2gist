@@ -1,5 +1,9 @@
 # All API Hub Sync to Gist
 
+![配置](https://image.ai6.me/file/user/FgE3ZOIw.png)
+
+**DEMO地址**: https://wlh.best/sync2gist/{your_gist_token}
+
 一个轻量级的 Node.js HTTP 服务，用于将 All API Hub 数据同步到 GitHub Gist。该服务提供简单的 HTTP 接口，自动管理 Gist 的创建和更新。
 
 ## 功能特性
@@ -86,8 +90,8 @@ all-api-hub-sync2gist/
 
 ### 添加新功能
 
-1. 在 `src/func.js` 中添加新的 Gist 操作函数
-2. 在 `src/index.js` 中添加相应的 HTTP 路由处理
+1. 在 [`src/func.js`](src/func.js) 中添加新的 Gist 操作函数
+2. 在 [`src/index.js`](src/index.js) 中添加相应的 HTTP 路由处理
 
 ## 许可证
 
