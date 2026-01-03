@@ -3,6 +3,8 @@
 ![配置](https://image.ai6.me/file/user/FgE3ZOIw.png)
 
 **DEMO地址**: https://wlh.best/sync2gist/{your_gist_token}
+> 获取token：https://github.com/settings/personal-access-tokens/new
+![token](https://image.ai6.me/file/user/bo35PuLe.png)
 
 一个轻量级的 Node.js HTTP 服务，用于将 All API Hub 数据同步到 GitHub Gist。该服务提供简单的 HTTP 接口，自动管理 Gist 的创建和更新。
 
