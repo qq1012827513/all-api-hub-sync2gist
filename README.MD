@@ -2,7 +2,9 @@
 
 ![配置](https://image.ai6.me/file/user/FgE3ZOIw.png)
 
-**DEMO地址**: https://wlh.best/sync2gist/{your_gist_token}
+**DEMO地址**: https://wlh.best/sync2gist/{your_gist_token}  
+
+**别人推荐的免费webdav**: https://rebun.infini-cloud.net/
 > 获取token：https://github.com/settings/personal-access-tokens/new
 ![token](https://image.ai6.me/file/user/bo35PuLe.png)
 
